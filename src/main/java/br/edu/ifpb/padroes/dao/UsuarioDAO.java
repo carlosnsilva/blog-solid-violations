@@ -1,6 +1,7 @@
-package br.edu.ifpb.padroes.service;
+package br.edu.ifpb.padroes.dao;
 
 import br.edu.ifpb.padroes.modelo.Usuario;
+import br.edu.ifpb.padroes.service.UsuarioServiceImpl;
 
 import java.sql.*;
 import java.util.List;

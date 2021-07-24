@@ -1,13 +1,14 @@
-package br.edu.ifpb.padroes.service;
+package br.edu.ifpb.padroes.dao;
 
 import br.edu.ifpb.padroes.modelo.Postagem;
 import br.edu.ifpb.padroes.modelo.PostagemResposta;
+import br.edu.ifpb.padroes.service.UsuarioServiceImpl;
 
 import java.sql.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class PostagemDAO {
+public class PostagemDAO implements DAO<T> {
 
     private String arquivoBanco;
     public PostagemDAO(String arquivoBanco) {

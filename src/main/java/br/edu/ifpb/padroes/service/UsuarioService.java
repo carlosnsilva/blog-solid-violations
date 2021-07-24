@@ -15,5 +15,5 @@ public interface UsuarioService {
     //void adicionarPostagem(Postagem postagem);
     //void removerPostagem(Postagem postagem);
     //void atualizarPostagem(Postagem postagem);
-    void adicionarResposta(Postagem postagem, Postagem resposta);
+    //void adicionarResposta(Postagem postagem, Postagem resposta);
 }

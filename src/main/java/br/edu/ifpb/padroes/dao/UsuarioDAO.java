@@ -9,13 +9,13 @@ import java.util.logging.Logger;
 
 public class UsuarioDAO extends DAO{
 
+    private Connection conexao = connect();
     private String arquivoBanco;
     public UsuarioDAO(String arquivoBanco) {
         super(arquivoBanco);
     }
 
     public void addUsuario(Usuario usuario) {
-        Connection conexao = connect();
         try (PreparedStatement stmt = conexao.prepareStatement("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (?, ?, ?, ?)")) {
             stmt.setLong(1, usuario.getId());
             stmt.setString(2, usuario.getNome());

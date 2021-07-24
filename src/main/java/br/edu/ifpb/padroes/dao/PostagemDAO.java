@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 public class PostagemDAO extends DAO {
 
+    private Connection conexao = connect();
     private String arquivoBanco;
     public PostagemDAO(String arquivoBanco) {
         super(arquivoBanco);
@@ -17,7 +18,6 @@ public class PostagemDAO extends DAO {
     }
 
     public void addPostagemPublica(Postagem postagem) {
-        Connection conexao = connect();
         try (PreparedStatement stmt = conexao.prepareStatement("INSERT INTO POSTAGEM( ID, TITULO, USUARIO_ID, MENSAGEM, TIPO) VALUES (?, ?, ?, ?, ?)")) {
             stmt.setLong(1, postagem.getId());
             stmt.setString(2, postagem.getTitulo());
@@ -31,7 +31,6 @@ public class PostagemDAO extends DAO {
     }
 
     public void addPostagemPrivada(Postagem postagem) {
-        Connection conexao = connect();
         try (PreparedStatement stmt = conexao.prepareStatement("INSERT INTO POSTAGEM( ID, TITULO, USUARIO_ID, MENSAGEM, TIPO) VALUES (?, ?, ?, ?, ?)")) {
             stmt.setLong(1, postagem.getId());
             stmt.setString(2, postagem.getTitulo());

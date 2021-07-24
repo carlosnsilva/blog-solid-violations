@@ -1,23 +1,38 @@
 package br.edu.ifpb.padroes.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-public abstract class DAO<T> {
+public abstract class DAO {
 
     private String arquivoBanco;
-    public PostagemDAO(String arquivoBanco) {
+    public DAO(String arquivoBanco) {
         this.arquivoBanco = arquivoBanco;
     }
 
-    private Connection connect() {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:"+this.arquivoBanco)) {
+    public Connection connect() {
+        try (Connection connection = DriverManager.getConnection(this.arquivoBanco)) {
             Statement statement = connection.createStatement();
 
-            //Criando tabela de usuários
+            //Criando tabela de postagem
             statement.execute("CREATE TABLE IF NOT EXISTS POSTAGEM( ID INTEGER, TITULO VARCHAR, USUARIO_ID VARCHAR, MENSAGEM VARCHAR, TIPO VARCHAR )");
+
+            //Criando tabela de usuários
+            statement.execute("CREATE TABLE IF NOT EXISTS USUARIO( ID INTEGER, NOME VARCHAR, LOGIN VARCHAR, SENHA VARCHAR )");
+            statement.execute("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (1, 'admin', 'admin', '123')");
+
+            //Criando tabela de produtos
+            statement.execute("CREATE TABLE IF NOT EXISTS USUARIO( ID INTEGER, NOME VARCHAR, LOGIN VARCHAR, SENHA VARCHAR )");
+            statement.execute("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (1, 'admin', 'admin', '123')");
+
+            PreparedStatement stmt = connection.prepareStatement("select * from USUARIO");
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("ID");
+                String nome = resultSet.getString("NOME");
+
+                System.out.println( id + " - " + nome);
+            }
 
             return connection;
         } catch (SQLException e) {
